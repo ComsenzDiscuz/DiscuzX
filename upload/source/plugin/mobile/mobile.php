@@ -33,7 +33,7 @@ $defaultversions = array(
 if(!isset($_GET['module']) || !in_array($_GET['module'], $modules)) {
 	mobile_core::result(array('error' => 'module_not_exists'));
 }
-$_GET['version'] = !empty($_GET['version']) ? intval($_GET['version']) : (!$defaultversions[$_GET['module']] ? 1 : $defaultversions[$_GET['module']]);
+$_GET['version'] = !empty($_GET['version']) ? intval($_GET['version']) : (!array_key_exists($_GET['module'], $defaultversions) ? 1 : $defaultversions[$_GET['module']]);
 $_GET['version'] = $_GET['version'] > MOBILE_PLUGIN_VERSION ? MOBILE_PLUGIN_VERSION : $_GET['version'];
 
 if(empty($_GET['module']) || empty($_GET['version']) || !preg_match('/^[\w\.]+$/', $_GET['module']) || !preg_match('/^[\d\.]+$/', $_GET['version'])) {
